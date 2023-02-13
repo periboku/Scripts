@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cp /var/www/current/storage/logs/laravel.log /home/ec2-user/logrotate/log/
+cd log/
+mv laravel.log laravel-`date +%F`.log
+ARABA=$(ls)
+aws s3 cp $ARABA s3://$ARABA
+rm -rf *
